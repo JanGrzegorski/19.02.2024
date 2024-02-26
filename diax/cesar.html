@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cesar Cipher</title>
+    <script>
+        function cesar_cipher(text, shift) {
+            let result = "";
+            for (let i = 0; i < text.length; i++) {
+                let char = text.charAt(i);
+                if (/[a-zA-Z]/.test(char)) {
+                    let ascii_offset = char === char.toLowerCase() ? 97 : 65;
+                    let encrypted_char_code = (char.charCodeAt(0) - ascii_offset + shift) % 26 + ascii_offset;
+                    let encrypted_char = String.fromCharCode(encrypted_char_code);
+                    result += encrypted_char;
+                } else {
+                    result += char;
+                }
+            }
+            return result;
+        }
+    </script>
+</head>
+<body>
+    <h1>Cesar Cipher</h1>
+    <label for="text">Text:</label>
+    <input type="text" id="text" name="text">
+    <br>
+    <label for="shift">Shift:</label>
+    <input type="number" id="shift" name="shift" min="1" max="25">
+    <br>
+    <button onclick="encrypt()">Encrypt</button>
+    <p id="encrypted_text"></p>
+    <script>
+        function encrypt() {
+            let text = document.getElementById("text").value;
+            let shift = parseInt(document.getElementById("shift").value);
+            let encrypted_text = cesar_cipher(text, shift);
+            document.getElementById("encrypted_text").innerText = encrypted_text;
+        }
+    </script>
+</body>
+</html>

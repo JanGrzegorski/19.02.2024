@@ -14,8 +14,10 @@
         R:<input type="number" id="r">
         G:<input type="number" id="g">
         B:<input type="number" id="b">
+        ▲:<input type="checkbox" id="check">
         <div id="oblicz"><button onclick="bomba()">Licz se to</button></div>
     </header>
+<div id="Licznik">Ile:</div>
     <div id="center"></div>
 </body>
 <script>
@@ -26,22 +28,43 @@
         var r = document.getElementById("r").value;
         var g = document.getElementById("g").value;
         var b = document.getElementById("b").value;
-
-
         document.getElementById("center").textContent = " ";
+                                                                                                                                                                                                                                                                                                                                                                     
+        let z=0;
         for (var i = 0; i < ilosc; i++, r++, g++, b++) {
         var kwadrat = document.createElement('div');
-        kwadrat.style.width = szer + 'px';
+        var trojkont = document.createElement('div');
+        trojkont.style.height = "100%";
+        trojkont.style.margin = "auto";
+        trojkont.style.marginTop = "-20px";
+        trojkont.style.width = "100%";
+        trojkont.style.backgroundColor = "red"
+        trojkont.style.clipPath = "polygon(50% 0%, 0% 100%, 100% 100%)";
         kwadrat.style.height = wys + 'px';
         kwadrat.style.backgroundColor = 'rgb(' + r + ',' + g + ',' + b + ')';
         kwadrat.style.margin = "5px"
+        kwadrat.style.width = szer + 'px';
         kwadrat.textContent = i + 1
         kwadrat.style.borderBlockColor = "black";
         kwadrat.style.borderStyle = "solid";
         center.appendChild(kwadrat);
-        }
-    }
 
+        var checkbox = document.getElementById("check");
+        if(checkbox.checked) {
+        if(i%2 == 0){
+            if(i%7!=0){
+            kwadrat.appendChild(trojkont)
+            }
+        }
+        if(i%7 ==0){
+            z++;
+            kwadrat.style.borderRadius =  "100%";
+        }
+        document.getElementById("Licznik").innerText = z;
+    }
+}
+}
+     
 </script>
 </body>
 </html>
